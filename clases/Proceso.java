@@ -38,6 +38,7 @@ public class Proceso {
         this.recursos = recursos;
     }
 
+    //REDUCE EN 1 LA CANTIDAD DE SEGUNDOS DE UN PROCESO
     public void reduceDuracion(){
         this.duracion--;
     }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Cronometro extends Thread{
     int segundos = 0;
 
+    //FUNCION PARA IMPORTAR LISTA DE PARTICIONES
     static ArrayList<Particion> particiones = null;
-
     public static void setParticiones(ArrayList<Particion> p){
         particiones = p;
     }
@@ -21,7 +21,7 @@ public class Cronometro extends Thread{
                     if(!particion.procesoActivo.equals(null)){
                         //SE REDUCE 1 A LA DURACION DE CADA PROCESO ACTIVO
                         particion.procesoActivo.reduceDuracion();
-                        //SI EL TIEMPO RESTANTE ES 0 AVANZA LA COLA
+                        //SI EL TIEMPO RESTANTE ES MENOR O IGUAL A 0 AVANZA LA COLA
                         if(!(particion.procesoActivo.getDuracion()>0)){
                             particion.avanzarCola();
                             dibujo();
@@ -35,6 +35,7 @@ public class Cronometro extends Thread{
         }
     }
 
+    //FUNCION PARA DIBUJAR RESULTADOS
     public void dibujo(){
         try{
             System.out.println("|-----------------------------------------------------------------------|");

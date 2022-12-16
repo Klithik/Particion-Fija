@@ -70,10 +70,12 @@ public class main{
         procesos.add(P7);
         procesos.add(P8);
 
+        //SE ASIGNAN PROCESOS A PARTICIONES INICIALES
         for (Proceso proceso : procesos) {
             Algoritmos.ordenamientoStack(proceso);
         }
 
+        //INICIA EL CRONOMETRO Y EL RESTO DEL PROGRAMA
         Cronometro cronometro = new Cronometro();
         cronometro.start();
     }

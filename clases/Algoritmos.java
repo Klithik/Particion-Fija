@@ -9,26 +9,22 @@ public class Algoritmos{
         particiones = p;
     }
     public static String ordenamientoStack(Proceso p){
-        //BUSCA PARTICIONES VACIAS PARA INSERTAR EL PROCESO
-        for (Particion particion : particiones) {
-            if(p.getRecursos()<=particion.getRecursos()){
-                if(particion.procesoActivo == null){
-                    particion.setProcesoActivo(p);
-                    return particion.toString();
-                }
-            }
-        }
-
         //BUSCA LA COLA MAS CORTA A LA QUE AGREGAR EL PROCESO
         int menor_espera=9999999;
         int menor = 0;
         boolean cambio = false;
         for (Particion particion : particiones) {
+            //SOLO SE TIENEN EN CUENTA PARTICIONES CAPACES
+            //DE ALOJAR EL PROCESO
             if(p.getRecursos()<=particion.getRecursos()){
+                //SI LA PARTICION NO TIENE UN PROCESO ACTIVO, SIGNIFICA QUE
+                //ESTA INACTIVA, CON LO QUE EL PROCESO ACTUAL SE INSERTA AHI
                 if(particion.getProcesoActivo().equals(null)){
                     particion.setProcesoActivo(p);
                     continue;
                 }
+                //SI LA PARTICION NO ESTA VACIA, SE CONSIDERA EL TIEMPO RESTANTE DEL PROCESO
+                //ACTIVO ACTUAL PARA CONTAR LA LONGITUD TOTAL DE LA COLA
                 int suma = particion.getProcesoActivo().getDuracion();
                 //REVISA SI HAY ELEMENTOS EN LA COLA Y CUAL ES LA ESPERA TOTAL EN ESA COLA
                 if(!particion.getCola().isEmpty()){
@@ -45,10 +41,12 @@ public class Algoritmos{
             }
         }
 
-        
+        //VERIFICA QUE EN ALGUN MOMENTO SE ENCONTRO UNA PARTICION
+        //CAPAZ DE ALOJAR EL PROCESO
         if(!cambio){
             return "Ninguna particion válida para el proceso";
         }else{
+            //SE AGREGA EL PROCESO A LA COLA MAS CORTA ENCONTRADA
             for (Particion particion : particiones) {
                 if(particion.hashCode() == menor){particion.agregarCola(p);}
             }
@@ -56,6 +54,7 @@ public class Algoritmos{
         return "agregado";
     }
 
+    //ALGORITMO BEST FIT **PENDIENTE**
     public static String ordenamientoBestFit(Proceso p){
         return "Proceso no válido para ninguna particion";
     }
