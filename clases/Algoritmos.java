@@ -1,7 +1,14 @@
 package clases;
 
+import java.util.ArrayList;
+
 public class Algoritmos{
-    public String stack(Proceso p,Particion[] particiones){
+    static ArrayList<Particion> particiones = null;
+
+    public static void setParticiones(ArrayList<Particion> p){
+        particiones = p;
+    }
+    public String ordenamientoStack(Proceso p){
         //BUSCA PARTICIONES VACIAS PARA INSERTAR EL PROCESO
         for (Particion particion : particiones) {
             if(p.getRecursos()<=particion.getRecursos()){

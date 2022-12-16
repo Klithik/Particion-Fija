@@ -9,7 +9,7 @@ public class Consola extends Thread{
         String cadena = sc.nextLine();
         try{
             Proceso nuevo = new Proceso(cadena);
-            Algoritmos.Stack(nuevo);
+            Algoritmos.ordenamientoStack(nuevo);
         }catch(Exception e){
             System.out.println("Entrada inválida");
             System.out.println(e.toString());

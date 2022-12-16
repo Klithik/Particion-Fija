@@ -13,7 +13,7 @@ public class Particion {
         procesoActivo = null;
     }
 
-    public Particion(Integer n, Integer rec){
+    public Particion(Integer rec){
         recursos = rec;
     }
 
