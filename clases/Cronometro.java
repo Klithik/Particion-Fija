@@ -21,9 +21,8 @@ public class Cronometro extends Thread{
                     if(!particion.procesoActivo.equals(null)){
                         //SE REDUCE 1 A LA DURACION DE CADA PROCESO ACTIVO
                         particion.procesoActivo.reduceDuracion();
-                        //System.out.println(particion.procesoActivo.getDuracion());
                         //SI EL TIEMPO RESTANTE ES 0 AVANZA LA COLA
-                        if(particion.procesoActivo.getDuracion()==0){
+                        if(!(particion.procesoActivo.getDuracion()>0)){
                             particion.avanzarCola();
                             dibujo();
                         }
@@ -37,32 +36,26 @@ public class Cronometro extends Thread{
     }
 
     public void dibujo(){
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|       M1      |       "+particiones.get(0).getProcesoActivo().toString()+"            |");
-        if(!particiones.get(0).getCola().isEmpty()){
-            for (Proceso proceso : particiones.get(0).getCola()) {
-                System.out.print(proceso.toString());
+        try{
+            System.out.println("|-----------------------------------------------------------------------|");
+            System.out.println("|           M1          |           M2          |           M3          |");
+            System.out.println("|-----------------------------------------------------------------------|");
+            int mayor = 0;
+            for (Particion particion : particiones) {
+                if(particion.getCola().size()>mayor){mayor=particion.getCola().size();}
             }
-        }
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|       M2      |       "+particiones.get(1).getProcesoActivo().toString()+"            |");
-        if(!particiones.get(1).getCola().isEmpty()){
-            for (Proceso proceso : particiones.get(1).getCola()) {
-                System.out.print(proceso.toString());
+            for(int i = 0; i<mayor; i++){
+                System.out.print("\n|");
+                for (Particion particion : particiones) {
+                    if(particion.getCola().size()>i){System.out.print(particion.getCola().get(i));}else{
+                        System.out.print("                       ");
+                    }
+                    System.out.print("|");
+                }
             }
+            System.out.println("\n|-----------------------------------------------------------------------|");
+        }catch(Exception e){
+            System.out.println(e.toString());
         }
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|       M3      |       "+particiones.get(2).getProcesoActivo().toString()+"            |");
-        if(!particiones.get(2).getCola().isEmpty()){
-            for (Proceso proceso : particiones.get(2).getCola()) {
-                System.out.print(proceso.toString());
-            }
-        }
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|-----------------------------------------------------------------------|");
-        System.out.println("|=======================================================================|");
-        System.out.println("|=======================================================================|");
     }
 }

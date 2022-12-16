@@ -27,16 +27,40 @@ public class main{
         Cronometro.setParticiones(particiones);
 
         //DECLARACION DE PROCESOS BASICOS
-        Proceso P1 = new Proceso(7,12);
+        Proceso P1 = new Proceso(7,3);
         Proceso P2 = new Proceso(5,3);
-        Proceso P3 = new Proceso(12,10);
+        Proceso P3 = new Proceso(12,4);
         Proceso P4 = new Proceso(6,7);
-        Proceso P5 = new Proceso(7,12);
+        Proceso P5 = new Proceso(7,5);
         Proceso P6 = new Proceso(5,3);
-        Proceso P7 = new Proceso(12,10);
+        Proceso P7 = new Proceso(12,8);
         Proceso P8 = new Proceso(6,7);
 
         //SE AGREGAN LOS PROCESOS RECIEN CREADOS A LA LISTA
+        procesos.add(P1);
+        procesos.add(P2);
+        procesos.add(P3);
+        procesos.add(P4);
+        procesos.add(P5);
+        procesos.add(P6);
+        procesos.add(P7);
+        procesos.add(P8);
+        procesos.add(P1);
+        procesos.add(P2);
+        procesos.add(P3);
+        procesos.add(P4);
+        procesos.add(P5);
+        procesos.add(P6);
+        procesos.add(P7);
+        procesos.add(P8);
+        procesos.add(P1);
+        procesos.add(P2);
+        procesos.add(P3);
+        procesos.add(P4);
+        procesos.add(P5);
+        procesos.add(P6);
+        procesos.add(P7);
+        procesos.add(P8);
         procesos.add(P1);
         procesos.add(P2);
         procesos.add(P3);

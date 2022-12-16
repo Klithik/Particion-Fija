@@ -25,6 +25,10 @@ public class Algoritmos{
         boolean cambio = false;
         for (Particion particion : particiones) {
             if(p.getRecursos()<=particion.getRecursos()){
+                if(particion.getProcesoActivo().equals(null)){
+                    particion.setProcesoActivo(p);
+                    continue;
+                }
                 int suma = particion.getProcesoActivo().getDuracion();
                 //REVISA SI HAY ELEMENTOS EN LA COLA Y CUAL ES LA ESPERA TOTAL EN ESA COLA
                 if(!particion.getCola().isEmpty()){
