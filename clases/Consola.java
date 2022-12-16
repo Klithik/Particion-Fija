@@ -2,6 +2,8 @@ package clases;
 
 import java.util.Scanner;
 
+//CLASE DESTINADA A RECIBIR COMANDOS POR CONSOLA
+//PARA AGREGAR PROCESOS EN TIEMPO REAL
 public class Consola extends Thread{
     Scanner sc = new Scanner(System.in);
     int opcion;

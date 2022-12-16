@@ -43,16 +43,22 @@ public class Particion {
         this.cola = cola;
     }
 
+    //AGREGA EL PROCESO P A LA COLA
     public void agregarCola(Proceso p){
         cola.add(p);
     }
 
+    //AVANZA LA COLA
     public Boolean avanzarCola(){
         try{
+            //SI LA COLA ESTA VACIA Y SE ESTABLECE COMO NULO EL PROCESO ACTIVO
+            //SIGNIFICANDO QUE ESA PARTICION ESTA INACTIVA
             if(this.cola.isEmpty()){
                 this.procesoActivo = null;
                 return true;
             }else{
+                //SI EL LA COLA NO ESTA VACIA, SE QUITA EL PRIMER ELEMENTO Y SE COLOCA
+                //COMO PROCESO ACTIVO DE LA PARTICION
                 Proceso p = this.cola.remove(0);
                 this.procesoActivo = p;
             }
