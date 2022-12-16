@@ -37,4 +37,8 @@ public class Proceso {
     public void setRecursos(Integer recursos) {
         this.recursos = recursos;
     }
+
+    public void reduceDuracion(){
+        this.duracion--;
+    }
 }

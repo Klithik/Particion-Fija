@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class main{
     static Boolean activo = true;
+    static int opcion = 0;
     public static void main(String[] args){
         //LISTA DE PROCESOS EXISTENTES
         ArrayList<Proceso> procesos = new ArrayList<Proceso>();
@@ -23,19 +24,31 @@ public class main{
         particiones.add(M3);
 
         Algoritmos.setParticiones(particiones);
+        Cronometro.setParticiones(particiones);
 
         //DECLARACION DE PROCESOS BASICOS
         Proceso P1 = new Proceso(7,12);
         Proceso P2 = new Proceso(5,3);
         Proceso P3 = new Proceso(12,10);
         Proceso P4 = new Proceso(6,7);
+        Proceso P5 = new Proceso(7,12);
+        Proceso P6 = new Proceso(5,3);
+        Proceso P7 = new Proceso(12,10);
+        Proceso P8 = new Proceso(6,7);
 
         //SE AGREGAN LOS PROCESOS RECIEN CREADOS A LA LISTA
         procesos.add(P1);
         procesos.add(P2);
         procesos.add(P3);
         procesos.add(P4);
+        procesos.add(P5);
+        procesos.add(P6);
+        procesos.add(P7);
+        procesos.add(P8);
 
+        for (Proceso proceso : procesos) {
+            Algoritmos.ordenamientoStack(proceso);
+        }
 
         Cronometro cronometro = new Cronometro();
         cronometro.start();

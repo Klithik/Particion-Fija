@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Particion {
     Integer recursos; //RECURSOS DISPONIBLES EN LA PARTICION (EN MB)
     Proceso procesoActivo; //PROCESO ACTUALMENTE ALOJADO EN LA PARTICION
-    ArrayList<Proceso> cola; //COLA DE PROCESOS DE LA PARTICION
+    ArrayList<Proceso> cola = new ArrayList<Proceso>(); //COLA DE PROCESOS DE LA PARTICION
 
     //CONSTRUCTORES
     public Particion(){
@@ -15,6 +15,7 @@ public class Particion {
 
     public Particion(Integer rec){
         recursos = rec;
+        procesoActivo = null;
     }
 
     //GETTERS Y SETTERS
@@ -47,17 +48,17 @@ public class Particion {
     }
 
     public Boolean avanzarCola(){
-        if(cola.equals(null)){
-            procesoActivo = null;
-            return true;
-        }else{
-            try{
-                Proceso p = cola.remove(0);
-                procesoActivo = p;
-            }catch(Exception e){
-                System.out.println(e.toString());
+        try{
+            if(this.cola.isEmpty()){
+                this.procesoActivo = null;
+                return true;
+            }else{
+                Proceso p = this.cola.remove(0);
+                this.procesoActivo = p;
             }
-            return true;
+        }catch(Exception e){
+            System.out.println(e.toString());
         }
+        return true;
     }
 }

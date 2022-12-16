@@ -8,11 +8,11 @@ public class Algoritmos{
     public static void setParticiones(ArrayList<Particion> p){
         particiones = p;
     }
-    public String ordenamientoStack(Proceso p){
+    public static String ordenamientoStack(Proceso p){
         //BUSCA PARTICIONES VACIAS PARA INSERTAR EL PROCESO
         for (Particion particion : particiones) {
             if(p.getRecursos()<=particion.getRecursos()){
-                if(particion.procesoActivo.equals(null)){
+                if(particion.procesoActivo == null){
                     particion.setProcesoActivo(p);
                     return particion.toString();
                 }
@@ -20,13 +20,14 @@ public class Algoritmos{
         }
 
         //BUSCA LA COLA MAS CORTA A LA QUE AGREGAR EL PROCESO
-        int menor_espera=0;
-        Particion menor = null;
+        int menor_espera=9999999;
+        int menor = 0;
+        boolean cambio = false;
         for (Particion particion : particiones) {
             if(p.getRecursos()<=particion.getRecursos()){
                 int suma = particion.getProcesoActivo().getDuracion();
                 //REVISA SI HAY ELEMENTOS EN LA COLA Y CUAL ES LA ESPERA TOTAL EN ESA COLA
-                if(particion.getCola().size()!=0){
+                if(!particion.getCola().isEmpty()){
                     for (Proceso proceso : particion.getCola()) {
                         suma=+proceso.getDuracion();
                     }
@@ -34,18 +35,24 @@ public class Algoritmos{
                 //SI LA ENCONTRADA ES LA MAS CORTA HASTA EL MOMENTO GUARDA SU INFORMACION PARA USO FUTURO
                 if(suma<menor_espera){
                     menor_espera=suma;
-                    menor=particion;
+                    menor=particion.hashCode();
+                    cambio = true;
                 }
             }
         }
 
-        //SI LA VARIABLE MENOR SIGUE NULA ES PORQUE NINGUNA COLA ERA ADECUADA PARA EL PROCESO
-        if(menor.equals(null)){
+        
+        if(!cambio){
             return "Ninguna particion válida para el proceso";
         }else{
-            //SI MENOR NO ES NULO ES PORQUE ENCONTRO UNA OPCION EN LA QUE INGRESAR EL PROCESO
-            menor.agregarCola(p);
-            return menor.toString();
+            for (Particion particion : particiones) {
+                if(particion.hashCode() == menor){particion.agregarCola(p);}
+            }
         }
+        return "agregado";
+    }
+
+    public static String ordenamientoBestFit(Proceso p){
+        return "Proceso no válido para ninguna particion";
     }
 }
