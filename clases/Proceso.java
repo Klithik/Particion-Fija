@@ -1,9 +1,9 @@
 package clases;
 
 public class Proceso {
-    Integer pid;
-    Integer duracion;
-    Integer recursos;
+    Integer pid; //ID DEL PROCESO
+    Integer duracion; //TIEMPO DE EJECUCION DEL PROCESO
+    Integer recursos; //RECURSOS EXIGIDOS POR EL PROCESO (EN MB)
 
     //CONSTRUCTORES
     public Proceso(){

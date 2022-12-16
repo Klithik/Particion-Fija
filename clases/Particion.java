@@ -1,10 +1,10 @@
 package clases;
 
 public class Particion {
-    Integer numero;
-    Integer recursos;
-    Proceso procesoActivo;
-    Proceso[] cola;
+    Integer numero; //ID DE LA PARTICION
+    Integer recursos; //RECURSOS DISPONIBLES EN LA PARTICION (EN MB)
+    Proceso procesoActivo; //PROCESO ACTUALMENTE ALOJADO EN LA PARTICION
+    Proceso[] cola; //COLA DE PROCESOS DE LA PARTICION
 
     //CONSTRUCTORES
     public Particion(){
