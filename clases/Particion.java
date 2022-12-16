@@ -45,4 +45,19 @@ public class Particion {
     public void agregarCola(Proceso p){
         cola.add(p);
     }
+
+    public Boolean avanzarCola(){
+        if(cola.equals(null)){
+            procesoActivo = null;
+            return true;
+        }else{
+            try{
+                Proceso p = cola.remove(0);
+                procesoActivo = p;
+            }catch(Exception e){
+                System.out.println(e.toString());
+            }
+            return true;
+        }
+    }
 }
