@@ -44,13 +44,14 @@ public class Algoritmos{
         //VERIFICA QUE EN ALGUN MOMENTO SE ENCONTRO UNA PARTICION
         //CAPAZ DE ALOJAR EL PROCESO
         if(!cambio){
+            System.out.println("Particion válida no encontrada");
             return "Ninguna particion válida para el proceso";
         }else{
             //SE AGREGA EL PROCESO A LA COLA MAS CORTA ENCONTRADA
             for (Particion particion : particiones) {
                 if(particion.hashCode() == menor){
                     particion.agregarCola(p);
-                    break;
+                    return "agregado";
                 }
             }
         }
