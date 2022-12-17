@@ -19,7 +19,7 @@ public class Algoritmos{
             if(p.getRecursos()<=particion.getRecursos()){
                 //SI LA PARTICION NO TIENE UN PROCESO ACTIVO, SIGNIFICA QUE
                 //ESTA INACTIVA, CON LO QUE EL PROCESO ACTUAL SE INSERTA AHI
-                if(particion.getProcesoActivo().equals(null)){
+                if(particion.getProcesoActivo() == null){
                     particion.setProcesoActivo(p);
                     continue;
                 }
@@ -48,7 +48,10 @@ public class Algoritmos{
         }else{
             //SE AGREGA EL PROCESO A LA COLA MAS CORTA ENCONTRADA
             for (Particion particion : particiones) {
-                if(particion.hashCode() == menor){particion.agregarCola(p);}
+                if(particion.hashCode() == menor){
+                    particion.agregarCola(p);
+                    break;
+                }
             }
         }
         return "agregado";
@@ -56,6 +59,57 @@ public class Algoritmos{
 
     //ALGORITMO BEST FIT **PENDIENTE**
     public static String ordenamientoBestFit(Proceso p){
-        return "Proceso no válido para ninguna particion";
+        int menor_diferencia = 999999;
+        int menor = 0;
+        for (Particion particion : particiones) {
+            if(p.getRecursos()<=particion.getRecursos()){
+                //OBTIENE LA CANTIDAD DE RECURSOS QUE SERIAN DESPERDICIADOS SI ESE PROCESO
+                //SE ALMACENA EN ESTA PARTICION
+                int diferencia = particion.getRecursos()-p.getRecursos();
+                if(diferencia<menor_diferencia){
+                    menor_diferencia = diferencia;
+                    menor = particion.hashCode();
+                }else if(diferencia==menor_diferencia){
+                    //COMPARA LA ESPERA DE AMBAS COLAS Y ELIGE LA MAS CORTA
+                    int espera1 = 0;
+                    int espera2 = 0;
+                    //OBTIENE TIEMPO TOTAL DE LA COLA DE LA PARTICION EN REVISION ACTUAL
+                    for (Proceso proceso : particion.getCola()) {
+                        espera1=+proceso.getDuracion();
+                    }
+                    //ENCUENTRA LA PARTICION GUARDADA ANTERIORMENTE Y OBTIENE SU TIEMPO TOTAL DE COLA
+                    for (Particion par : particiones) {
+                        if(par.hashCode()==menor){
+                            for (Proceso proceso : par.getCola()) {
+                                espera2=+proceso.getDuracion();
+                            }
+                        }
+                    }
+                    //EN CASO DE QUE LA PARTICION EN REVISION ACTUAL TENGA ESPERA MENOR
+                    //EL PROCESO SE ALMACENA AHI, EN CASO CONTRARIO SE MANTIENE GUARDADA
+                    //LA PARTICION ANTERIOR
+                    if(espera1<espera2){
+                        menor_diferencia = diferencia;
+                        menor = particion.hashCode();
+                    }
+                }
+            }
+        }
+        //SE REVISA QUE SE HAYA ENCONTRADO UNA PARTICION VALIDA Y SE
+        //ALMACENA EL PROCESO EN ESA PARTICION
+        if(menor!=0){
+            for (Particion particion : particiones) {
+                if(particion.hashCode() == menor){
+                    if(particion.getProcesoActivo() == null){
+                        particion.setProcesoActivo(p);
+                        return "listo";
+                    }else{
+                        particion.agregarCola(p);
+                        return "listo";
+                    }
+                }
+            }
+        }
+        return "alo";
     }
 }

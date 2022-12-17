@@ -18,11 +18,11 @@ public class Cronometro extends Thread{
                 Thread.sleep(1000);
                 segundos++;
                 for (Particion particion : particiones) {
-                    if(!particion.procesoActivo.equals(null)){
+                    if(particion.procesoActivo != null){
                         //SE REDUCE 1 A LA DURACION DE CADA PROCESO ACTIVO
                         particion.procesoActivo.reduceDuracion();
                         //SI EL TIEMPO RESTANTE ES MENOR O IGUAL A 0 AVANZA LA COLA
-                        if(!(particion.procesoActivo.getDuracion()>0)){
+                        if(!(particion.procesoActivo.getDuracion()>=0)){
                             particion.avanzarCola();
                             dibujo();
                         }
@@ -36,7 +36,7 @@ public class Cronometro extends Thread{
     }
 
     //FUNCION PARA DIBUJAR RESULTADOS
-    public void dibujo(){
+    public static void dibujo(){
         try{
             System.out.println("|-----------------------------------------------------------------------|");
             System.out.println("|           M1          |           M2          |           M3          |");

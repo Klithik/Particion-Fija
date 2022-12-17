@@ -1,8 +1,10 @@
 import clases.Cronometro;
 import clases.Particion;
 import clases.Algoritmos;
+import clases.Consola;
 import clases.Proceso;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class main{
     static Boolean activo = true;
@@ -45,35 +47,14 @@ public class main{
         procesos.add(P6);
         procesos.add(P7);
         procesos.add(P8);
-        procesos.add(P1);
-        procesos.add(P2);
-        procesos.add(P3);
-        procesos.add(P4);
-        procesos.add(P5);
-        procesos.add(P6);
-        procesos.add(P7);
-        procesos.add(P8);
-        procesos.add(P1);
-        procesos.add(P2);
-        procesos.add(P3);
-        procesos.add(P4);
-        procesos.add(P5);
-        procesos.add(P6);
-        procesos.add(P7);
-        procesos.add(P8);
-        procesos.add(P1);
-        procesos.add(P2);
-        procesos.add(P3);
-        procesos.add(P4);
-        procesos.add(P5);
-        procesos.add(P6);
-        procesos.add(P7);
-        procesos.add(P8);
 
-        //SE ASIGNAN PROCESOS A PARTICIONES INICIALES
-        for (Proceso proceso : procesos) {
-            Algoritmos.ordenamientoStack(proceso);
-        }
+        System.out.println("Elige algoritmo: 0=Stack    1=Best Fit");
+        Scanner sc = new Scanner(System.in);
+        String cadena = sc.nextLine();
+
+        Consola con = new Consola();
+        con.elegirAlgoritmo(Integer.parseInt(cadena),procesos);
+        con.start();
 
         //INICIA EL CRONOMETRO Y EL RESTO DEL PROGRAMA
         Cronometro cronometro = new Cronometro();
