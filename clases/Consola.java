@@ -34,9 +34,11 @@ public class Consola extends Thread{
                 switch(opcion){
                     case 0:
                         Algoritmos.ordenamientoStack(nuevo);
+                        Cronometro.dibujo();
                         break;
                     case 1:
                         Algoritmos.ordenamientoBestFit(nuevo);
+                        Cronometro.dibujo();
                         break;
                 }
             }catch(Exception e){
