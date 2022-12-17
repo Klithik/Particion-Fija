@@ -57,7 +57,7 @@ public class Algoritmos{
         return "agregado";
     }
 
-    //ALGORITMO BEST FIT **PENDIENTE**
+    //ALGORITMO BEST FIT **POR REVISAR**
     public static String ordenamientoBestFit(Proceso p){
         int menor_diferencia = 999999;
         int menor = 0;
