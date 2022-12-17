@@ -21,7 +21,7 @@ public class Algoritmos{
                 //ESTA INACTIVA, CON LO QUE EL PROCESO ACTUAL SE INSERTA AHI
                 if(particion.getProcesoActivo() == null){
                     particion.setProcesoActivo(p);
-                    continue;
+                    return "listo";
                 }
                 //SI LA PARTICION NO ESTA VACIA, SE CONSIDERA EL TIEMPO RESTANTE DEL PROCESO
                 //ACTIVO ACTUAL PARA CONTAR LA LONGITUD TOTAL DE LA COLA
