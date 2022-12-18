@@ -22,7 +22,7 @@ public class Cronometro extends Thread{
                         //SE REDUCE 1 A LA DURACION DE CADA PROCESO ACTIVO
                         particion.procesoActivo.reduceDuracion();
                         //SI EL TIEMPO RESTANTE ES MENOR O IGUAL A 0 AVANZA LA COLA
-                        if(!(particion.procesoActivo.getDuracion()>=0)){
+                        if(particion.procesoActivo.getDuracion()<=0){
                             particion.avanzarCola();
                             dibujo();
                         }
