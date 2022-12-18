@@ -31,7 +31,7 @@ public class main{
         //DECLARACION DE PROCESOS BASICOS
         Proceso P1 = new Proceso(7,3);
         Proceso P2 = new Proceso(5,3);
-        Proceso P3 = new Proceso(12,10);
+        Proceso P3 = new Proceso(12,9);
         Proceso P4 = new Proceso(6,7);
         Proceso P5 = new Proceso(7,11);
         Proceso P6 = new Proceso(5,3);

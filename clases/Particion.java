@@ -61,10 +61,11 @@ public class Particion {
                 //COMO PROCESO ACTIVO DE LA PARTICION
                 Proceso p = this.cola.remove(0);
                 this.procesoActivo = p;
+                return true;
             }
         }catch(Exception e){
             System.out.println(e.toString());
+            return false;
         }
-        return true;
     }
 }
