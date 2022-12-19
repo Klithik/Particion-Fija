@@ -11,7 +11,7 @@ public class Algoritmos{
     public static String ordenamientoStack(Proceso p){
         //BUSCA LA COLA MAS CORTA A LA QUE AGREGAR EL PROCESO
         int menor_espera=9999999;
-        int menor = 0;
+        Particion menor = null;
         boolean cambio = false;
         for (Particion particion : particiones) {
             //SOLO SE TIENEN EN CUENTA PARTICIONES CAPACES
@@ -35,7 +35,7 @@ public class Algoritmos{
                 //SI LA ENCONTRADA ES LA MAS CORTA HASTA EL MOMENTO GUARDA SU INFORMACION PARA USO FUTURO
                 if(suma<menor_espera){
                     menor_espera=suma;
-                    menor=particion.hashCode();
+                    menor=particion;
                     cambio = true;
                 }
             }
@@ -48,20 +48,15 @@ public class Algoritmos{
             return "Ninguna particion válida para el proceso";
         }else{
             //SE AGREGA EL PROCESO A LA COLA MAS CORTA ENCONTRADA
-            for (Particion particion : particiones) {
-                if(particion.hashCode() == menor){
-                    particion.agregarCola(p);
-                    return "agregado";
-                }
-            }
+            menor.agregarCola(p);
+            return "agregado";
         }
-        return "agregado";
     }
 
     //ALGORITMO BEST FIT **POR REVISAR**
     public static String ordenamientoBestFit(Proceso p){
         int menor_diferencia = 999999;
-        int menor = 0;
+        Particion menor = null;
         for (Particion particion : particiones) {
             if(p.getRecursos()<=particion.getRecursos()){
                 //OBTIENE LA CANTIDAD DE RECURSOS QUE SERIAN DESPERDICIADOS SI ESE PROCESO
@@ -69,7 +64,7 @@ public class Algoritmos{
                 int diferencia = particion.getRecursos()-p.getRecursos();
                 if(diferencia<menor_diferencia){
                     menor_diferencia = diferencia;
-                    menor = particion.hashCode();
+                    menor = particion;
                 }else if(diferencia==menor_diferencia){
                     //COMPARA LA ESPERA DE AMBAS COLAS Y ELIGE LA MAS CORTA
                     int espera1 = 0;
@@ -79,36 +74,28 @@ public class Algoritmos{
                         espera1=+proceso.getDuracion();
                     }
                     //ENCUENTRA LA PARTICION GUARDADA ANTERIORMENTE Y OBTIENE SU TIEMPO TOTAL DE COLA
-                    for (Particion par : particiones) {
-                        if(par.hashCode()==menor){
-                            for (Proceso proceso : par.getCola()) {
-                                espera2=+proceso.getDuracion();
-                            }
-                        }
+                    for (Proceso proceso : menor.getCola()) {
+                        espera2=+proceso.getDuracion();
                     }
                     //EN CASO DE QUE LA PARTICION EN REVISION ACTUAL TENGA ESPERA MENOR
                     //EL PROCESO SE ALMACENA AHI, EN CASO CONTRARIO SE MANTIENE GUARDADA
                     //LA PARTICION ANTERIOR
                     if(espera1<espera2){
                         menor_diferencia = diferencia;
-                        menor = particion.hashCode();
+                        menor = particion;
                     }
                 }
             }
         }
         //SE REVISA QUE SE HAYA ENCONTRADO UNA PARTICION VALIDA Y SE
         //ALMACENA EL PROCESO EN ESA PARTICION
-        if(menor!=0){
-            for (Particion particion : particiones) {
-                if(particion.hashCode() == menor){
-                    if(particion.getProcesoActivo() == null){
-                        particion.setProcesoActivo(p);
-                        return "listo";
-                    }else{
-                        particion.agregarCola(p);
-                        return "listo";
-                    }
-                }
+        if(menor != null){
+            if(menor.getProcesoActivo() == null){
+                menor.setProcesoActivo(p);
+                return "listo";
+            }else{
+                menor.agregarCola(p);
+                return "listo";
             }
         }
         return "error";
@@ -132,6 +119,18 @@ public class Algoritmos{
                 mejor.setProcesoActivo(p);
             }else{
                 mejor.agregarCola(p);
+            }
+        }
+    }
+
+    public static void firstFit(Proceso p){
+        for (Particion particion : particiones) {
+            if(particion.getRecursos() >= p.getRecursos()){
+                if(particion.getProcesoActivo() == null){
+                    particion.setProcesoActivo(p);
+                }else{
+                    particion.agregarCola(p);
+                }
             }
         }
     }

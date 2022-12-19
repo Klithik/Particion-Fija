@@ -19,6 +19,9 @@ public class Consola extends Thread{
                     case 1:
                         Algoritmos.ordenamientoBestFit(proceso);
                         break;
+                    case 2:
+                        Algoritmos.bestFit(proceso);
+                        break;
                 }
             }catch(Exception e){
                 System.out.println("Entrada inválida");
@@ -38,6 +41,10 @@ public class Consola extends Thread{
                         break;
                     case 1:
                         Algoritmos.ordenamientoBestFit(nuevo);
+                        Cronometro.dibujo();
+                        break;
+                    case 2:
+                        Algoritmos.bestFit(nuevo);
                         Cronometro.dibujo();
                         break;
                 }

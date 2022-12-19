@@ -48,7 +48,7 @@ public class main{
         procesos.add(P7);
         procesos.add(P8);
 
-        System.out.println("Elige algoritmo: 0=Stack    1=Best Fit");
+        System.out.println("Elige algoritmo: 0=Stack    1=Best Fit      2=BestFit2");
         Scanner sc = new Scanner(System.in);
         String cadena = sc.nextLine();
 
