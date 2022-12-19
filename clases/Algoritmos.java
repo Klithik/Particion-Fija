@@ -113,4 +113,26 @@ public class Algoritmos{
         }
         return "error";
     }
+
+    //BESTFIT SEBA **POR REVISAR**
+    public static void bestFit(Proceso p){
+        Particion mejor = null;
+        for (Particion particion : particiones) {
+            if(particion.getRecursos() >= p.getRecursos()){
+                if(mejor == null){
+                    mejor = particion;
+                }else if(mejor.getRecursos() > particion.getRecursos()){
+                    mejor = particion;
+                }
+            }
+        }
+
+        if(mejor != null){
+            if(mejor.getProcesoActivo() == null){
+                mejor.setProcesoActivo(p);
+            }else{
+                mejor.agregarCola(p);
+            }
+        }
+    }
 }
