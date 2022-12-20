@@ -8,6 +8,7 @@ public class Algoritmos{
     public static void setParticiones(ArrayList<Particion> p){
         particiones = p;
     }
+    
     public static void ordenamientoStack(Proceso p){
         //BUSCA LA COLA MAS CORTA A LA QUE AGREGAR EL PROCESO
         int menor_espera = -1;
