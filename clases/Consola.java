@@ -17,10 +17,10 @@ public class Consola extends Thread{
                         Algoritmos.ordenamientoStack(proceso);
                         break;
                     case 1:
-                        Algoritmos.ordenamientoBestFit(proceso);
+                        Algoritmos.bestFit(proceso);
                         break;
                     case 2:
-                        Algoritmos.bestFit(proceso);
+                        Algoritmos.firstFit(proceso);
                         break;
                 }
             }catch(Exception e){
@@ -36,16 +36,25 @@ public class Consola extends Thread{
                 Proceso nuevo = new Proceso(cadena);
                 switch(opcion){
                     case 0:
-                        Algoritmos.ordenamientoStack(nuevo);
-                        Cronometro.dibujo();
+                        if(Algoritmos.ordenamientoStack(nuevo)){
+                            Cronometro.dibujo();
+                        }else{
+                            System.out.println("ERROR AL INSERTAR PROCESO");
+                        }
                         break;
                     case 1:
-                        Algoritmos.ordenamientoBestFit(nuevo);
-                        Cronometro.dibujo();
+                        if(Algoritmos.bestFit(nuevo)){
+                            Cronometro.dibujo();
+                        }else{
+                            System.out.println("ERROR AL INSERTAR PROCESO");
+                        }
                         break;
                     case 2:
-                        Algoritmos.bestFit(nuevo);
-                        Cronometro.dibujo();
+                        if(Algoritmos.firstFit(nuevo)){
+                            Cronometro.dibujo();
+                        }else{
+                            System.out.println("ERROR AL INSERTAR PROCESO");
+                        }
                         break;
                 }
             }catch(Exception e){

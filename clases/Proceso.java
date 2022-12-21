@@ -23,7 +23,7 @@ public class Proceso {
 
     //GETTERS Y SETERS
     public Integer getDuracion() {
-        return duracion;
+        return this.duracion;
     }
 
     public void setDuracion(Integer duracion) {

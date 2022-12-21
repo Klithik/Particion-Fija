@@ -8,9 +8,8 @@ public class Algoritmos{
     public static void setParticiones(ArrayList<Particion> p){
         particiones = p;
     }
-    
-    public static void ordenamientoStack(Proceso p){
-        //BUSCA LA COLA MAS CORTA A LA QUE AGREGAR EL PROCESO
+
+    public static Boolean ordenamientoStack(Proceso p){
         int menor_espera = -1;
         Particion menor = null;
 
@@ -21,14 +20,16 @@ public class Algoritmos{
                 //SI LA PARTICION NO TIENE UN PROCESO ACTIVO, SIGNIFICA QUE
                 //ESTA INACTIVA, CON LO QUE EL PROCESO ACTUAL SE INSERTA AHI
                 if(particion.getProcesoActivo() == null){
+                    System.out.println("COLA VACIA");
                     particion.setProcesoActivo(p);
-                    return;
+                    return true;
                 }
                 //SI LA PARTICION NO ESTA VACIA, SE CONSIDERA EL TIEMPO RESTANTE DEL PROCESO
                 //ACTIVO ACTUAL PARA CONTAR LA LONGITUD TOTAL DE LA COLA
                 int suma =+ particion.getProcesoActivo().getDuracion();
                 //REVISA SI HAY ELEMENTOS EN LA COLA Y CUAL ES LA ESPERA TOTAL EN ESA COLA
                 if(!particion.getCola().isEmpty()){
+                    System.out.println("COLA NO VACIA");
                     for (Proceso proceso : particion.getCola()) {
                         suma =+ proceso.getDuracion();
                     }
@@ -47,63 +48,15 @@ public class Algoritmos{
         //CAPAZ DE ALOJAR EL PROCESO
         if(menor_espera == -1){
             System.out.println("Particion válida no encontrada");
-            return;
+            return false;
         }
         //SE AGREGA EL PROCESO A LA COLA MAS CORTA ENCONTRADA
         menor.agregarCola(p);
-        return;
+        return true;
     }
 
-    //ALGORITMO BEST FIT **POR REVISAR**
-    public static String ordenamientoBestFit(Proceso p){
-        int menor_diferencia = 999999;
-        Particion menor = null;
-        for (Particion particion : particiones) {
-            if(p.getRecursos()<=particion.getRecursos()){
-                //OBTIENE LA CANTIDAD DE RECURSOS QUE SERIAN DESPERDICIADOS SI ESE PROCESO
-                //SE ALMACENA EN ESTA PARTICION
-                int diferencia = particion.getRecursos()-p.getRecursos();
-                if(diferencia<menor_diferencia){
-                    menor_diferencia = diferencia;
-                    menor = particion;
-                }else if(diferencia==menor_diferencia){
-                    //COMPARA LA ESPERA DE AMBAS COLAS Y ELIGE LA MAS CORTA
-                    int espera1 = 0;
-                    int espera2 = 0;
-                    //OBTIENE TIEMPO TOTAL DE LA COLA DE LA PARTICION EN REVISION ACTUAL
-                    for (Proceso proceso : particion.getCola()) {
-                        espera1=+proceso.getDuracion();
-                    }
-                    //ENCUENTRA LA PARTICION GUARDADA ANTERIORMENTE Y OBTIENE SU TIEMPO TOTAL DE COLA
-                    for (Proceso proceso : menor.getCola()) {
-                        espera2=+proceso.getDuracion();
-                    }
-                    //EN CASO DE QUE LA PARTICION EN REVISION ACTUAL TENGA ESPERA MENOR
-                    //EL PROCESO SE ALMACENA AHI, EN CASO CONTRARIO SE MANTIENE GUARDADA
-                    //LA PARTICION ANTERIOR
-                    if(espera1<espera2){
-                        menor_diferencia = diferencia;
-                        menor = particion;
-                    }
-                }
-            }
-        }
-        //SE REVISA QUE SE HAYA ENCONTRADO UNA PARTICION VALIDA Y SE
-        //ALMACENA EL PROCESO EN ESA PARTICION
-        if(menor != null){
-            if(menor.getProcesoActivo() == null){
-                menor.setProcesoActivo(p);
-                return "listo";
-            }else{
-                menor.agregarCola(p);
-                return "listo";
-            }
-        }
-        return "error";
-    }
-
-    //BESTFIT SEBA **POR REVISAR**
-    public static void bestFit(Proceso p){
+    //BESTFIT
+    public static Boolean bestFit(Proceso p){
         Particion mejor = null;
         for (Particion particion : particiones) {
             if(particion.getRecursos() >= p.getRecursos()){
@@ -121,18 +74,30 @@ public class Algoritmos{
             }else{
                 mejor.agregarCola(p);
             }
+            return true;
         }
+        return false;
     }
 
-    public static void firstFit(Proceso p){
+    public static Boolean firstFit(Proceso p){
+        //RECORRE PARTICIONES
         for (Particion particion : particiones) {
+            //REVISA QUE EL PROCESO QUEPA EN LA PARTICION
             if(particion.getRecursos() >= p.getRecursos()){
+                //SI LA PARTICION NO TIENE PROCESO ACTIVO
+                //DEFINE EL PROCESO ACTUAL COMO ACTIVO EN LA PARTICION
                 if(particion.getProcesoActivo() == null){
                     particion.setProcesoActivo(p);
+                    return true;
                 }else{
+                    //SI LA PARTICION TIENE PROCESO ACTIVO
+                    //AGREGA EL PROCESO ACTUAL A LA COLA DE
+                    //LA PARTICION
                     particion.agregarCola(p);
+                    return true;
                 }
             }
         }
+        return false;
     }
 }

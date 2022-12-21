@@ -48,13 +48,20 @@ public class main{
         procesos.add(P7);
         procesos.add(P8);
 
-        System.out.println("Elige algoritmo: 0=Stack    1=Best Fit      2=BestFit2");
-        Scanner sc = new Scanner(System.in);
-        String cadena = sc.nextLine();
-
-        Consola con = new Consola();
-        con.elegirAlgoritmo(Integer.parseInt(cadena),procesos);
-        con.start();
+        while(true){
+            System.out.println("Elige algoritmo: 0=Stack    1=Best Fit      2=First Fit");
+            try{
+                Scanner sc = new Scanner(System.in);
+                String cadena = sc.nextLine();
+                Consola con = new Consola();
+                con.elegirAlgoritmo(Integer.parseInt(cadena),procesos);
+                con.start();
+                break;
+            }catch(Exception e){
+                System.out.println("Hubo un error, intentalo de nuevo");
+                System.out.println(e.toString());
+            }
+        }
 
         //INICIA EL CRONOMETRO Y EL RESTO DEL PROGRAMA
         Cronometro cronometro = new Cronometro();

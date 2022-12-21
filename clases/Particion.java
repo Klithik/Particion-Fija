@@ -28,11 +28,11 @@ public class Particion {
     }
 
     public Proceso getProcesoActivo() {
-        return procesoActivo;
+        return this.procesoActivo;
     }
 
-    public void setProcesoActivo(Proceso procesoActivo) {
-        this.procesoActivo = procesoActivo;
+    public void setProcesoActivo(Proceso p) {
+        this.procesoActivo = p;
     }
 
     public ArrayList<Proceso> getCola() {
