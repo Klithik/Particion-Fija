@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Consola extends Thread{
     Scanner sc = new Scanner(System.in);
     int opcion;
-    public void elegirAlgoritmo(Integer n,ArrayList<Proceso> procesos){
+    public void elegirAlgoritmoInicia(Integer n,ArrayList<Proceso> procesos){
         opcion = n;
         for (Proceso proceso : procesos) {
             try{
@@ -29,6 +29,11 @@ public class Consola extends Thread{
             }
         }
     }
+
+    public void elegirAlgoritmo(Integer n){
+        opcion = n;
+    }
+
     public void run(){
         while(true){
         String cadena = sc.nextLine();

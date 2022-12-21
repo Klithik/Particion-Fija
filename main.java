@@ -16,9 +16,9 @@ public class main{
         ArrayList<Particion> particiones = new ArrayList<Particion>();
 
         //DECLARACION DE PARTICIONES BASICAS
-        Particion M1 = new Particion(15);
-        Particion M2 = new Particion(7);
-        Particion M3 = new Particion(9);
+        Particion M1 = new Particion(7);
+        Particion M2 = new Particion(9);
+        Particion M3 = new Particion(15);
 
         //SE AGREGAN LAS PARTICIONES RECIEN CREADAS A LA LISTA
         particiones.add(M1);
@@ -54,7 +54,8 @@ public class main{
                 Scanner sc = new Scanner(System.in);
                 String cadena = sc.nextLine();
                 Consola con = new Consola();
-                con.elegirAlgoritmo(Integer.parseInt(cadena),procesos);
+                //con.elegirAlgoritmo(Integer.parseInt(cadena),procesos);
+                con.elegirAlgoritmo(Integer.parseInt(cadena));
                 con.start();
                 break;
             }catch(Exception e){

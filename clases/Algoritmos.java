@@ -47,7 +47,6 @@ public class Algoritmos{
         //VERIFICA QUE EN ALGUN MOMENTO SE ENCONTRO UNA PARTICION
         //CAPAZ DE ALOJAR EL PROCESO
         if(menor_espera == -1){
-            System.out.println("Particion válida no encontrada");
             return false;
         }
         //SE AGREGA EL PROCESO A LA COLA MAS CORTA ENCONTRADA
@@ -62,7 +61,9 @@ public class Algoritmos{
             if(particion.getRecursos() >= p.getRecursos()){
                 if(mejor == null){
                     mejor = particion;
-                }else if(mejor.getRecursos() > particion.getRecursos()){
+                    continue;
+                }
+                if(mejor.getRecursos() > particion.getRecursos()){
                     mejor = particion;
                 }
             }
