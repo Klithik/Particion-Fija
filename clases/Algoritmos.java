@@ -20,24 +20,30 @@ public class Algoritmos{
                 //SI LA PARTICION NO TIENE UN PROCESO ACTIVO, SIGNIFICA QUE
                 //ESTA INACTIVA, CON LO QUE EL PROCESO ACTUAL SE INSERTA AHI
                 if(particion.getProcesoActivo() == null){
-                    System.out.println("COLA VACIA");
                     particion.setProcesoActivo(p);
                     return true;
                 }
                 //SI LA PARTICION NO ESTA VACIA, SE CONSIDERA EL TIEMPO RESTANTE DEL PROCESO
                 //ACTIVO ACTUAL PARA CONTAR LA LONGITUD TOTAL DE LA COLA
                 int suma =+ particion.getProcesoActivo().getDuracion();
-                //REVISA SI HAY ELEMENTOS EN LA COLA Y CUAL ES LA ESPERA TOTAL EN ESA COLA
+                //REVISA SI HAY ELEMENTOS EN LA COLA
                 if(!particion.getCola().isEmpty()){
-                    System.out.println("COLA NO VACIA");
+                    //SE RECORREN LOS PROCESOS DE LA COLA PARA SUMAR SUS DURACIONES
+                    //Y OBTENER EL TIEMPO TOTAL DE LA COLA
                     for (Proceso proceso : particion.getCola()) {
                         suma =+ proceso.getDuracion();
                     }
                 }
+
+                //MENOR_ESPERA SOLO VALE -1 SI NUNCA SE ENCONTRO UNA PARTICION
+                //QUE PUEDA CONTENER EL PROCESO, ES DECIR, ESTA ES LA PRIMERA
+                //POR ESO SE DEFINE COMO LA MENOR
                 if(menor_espera == -1){
                     menor_espera = suma;
                     menor = particion;
                 }else if(suma<menor_espera){
+                    //SI EL TIEMPO ACTUAL ES MENOR AL MENOR GUARDADO, SE CAMBIA EL MENOR GUARDADO POR LA
+                    //PARTICION ACTUAL
                     menor_espera = suma;
                     menor = particion;
                 }
